@@ -1,8 +1,11 @@
 # Twirp::Rails
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/twirp/rails`. To experiment with that code, run `bin/console` for an interactive prompt.
+By using this gem, you can easily make Twirp RPC server on your Rails app.
 
-TODO: Delete this and the text above, and describe your gem
+## Features
+
+* A helper method to bind a controller with a service class.
+* Automatic routing installation
 
 ## Installation
 
@@ -20,9 +23,55 @@ Or install it yourself as:
 
     $ gem install twirp-rails
 
+## Configure
+
+### Routes
+
+To add routes, configure config/routes.rb as follow:
+
+```
+# config/routes.rb
+
+Rails.application.routes.draw do
+  use_twirp
+end
+```
+
+### Configuration
+
+You can customize:
+
+```
+# config/initializers/twirp_rails.rb
+
+Twirp::Rails.configure do |c|
+  c.controllers_path = Rails.root.join('app', 'controllers', 'rpc')
+end
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+Your app can automatically know how requests should route, by calling the helper method `twirp_bind` in controller implementations.
+
+```
+class HelloController
+  include Twirp::Rails::Helpers
+
+  twirp_bind HelloService
+
+  def hello(_req, _env)
+    HelloResponse.new(message: 'hello')
+  end
+end
+```
+
+By that above, corresponding route would be automatically defined.
+
+```
+$ bin/rails routes
+
+POST /twirp/HelloService/Hello => app
+```
 
 ## Development
 
