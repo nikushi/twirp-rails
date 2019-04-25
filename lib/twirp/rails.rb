@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "twirp/rails/configuration"
+require "twirp/rails/helpers"
 require "twirp/rails/version"
 
 module Twirp
@@ -12,6 +13,12 @@ module Twirp
         @configuration
       end
       attr_writer :configuration
+
+      # A store to register rack apps, which are the instantiated services.
+      # @return [Array<Twirp::Service>]
+      def services
+        @services ||= []
+      end
     end
   end
 end

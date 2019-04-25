@@ -51,13 +51,13 @@ end
 
 ## Usage
 
-Your app can automatically know how requests should route, by calling the helper method `twirp_bind` in controller implementations.
+Your app can automatically know how requests should route, by calling the helper method `bind` in controller implementations.
 
 ```
 class HelloController
   include Twirp::Rails::Helpers
 
-  twirp_bind HelloService
+  bind HelloService
 
   def hello(_req, _env)
     HelloResponse.new(message: 'hello')
