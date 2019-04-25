@@ -44,8 +44,8 @@ You can customize:
 ```
 # config/initializers/twirp_rails.rb
 
-Twirp::Rails.configure do |c|
-  c.controllers_path = Rails.root.join('app', 'controllers', 'rpc')
+Twirp::Rails.configuration do |c|
+  c.handlers_path = Rails.root.join('app', 'controllers', 'rpc')
 end
 ```
 
