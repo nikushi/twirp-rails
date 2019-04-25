@@ -2,6 +2,8 @@
 
 require "twirp/rails/configuration"
 require "twirp/rails/helpers"
+require "twirp/rails/routes"
+require "twirp/rails/engine"
 require "twirp/rails/version"
 
 module Twirp
