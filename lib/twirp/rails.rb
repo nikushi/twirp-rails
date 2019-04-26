@@ -21,6 +21,10 @@ module Twirp
       def services
         @services ||= []
       end
+
+      def load_handlers
+        Dir[File.join(configuration.handlers_path.to_s, '**', '*.rb')].each { |f| require f }
+      end
     end
   end
 end
