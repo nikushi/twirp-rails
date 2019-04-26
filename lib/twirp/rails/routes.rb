@@ -34,7 +34,7 @@ module Twirp
         routes.scope options[:scope] || 'twirp' do
           @services.each do |service|
             service.extend Inspectable
-            @routes.match service.full_name, to: service, via: :post
+            @routes.mount service, at: service.full_name
           end
         end
       end
