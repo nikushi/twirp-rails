@@ -33,7 +33,7 @@ Or install it yourself as:
 
 After insalled, put the configuration file as follows:
 
-```
+```ruby
 # config/initializers/twirp_rails.rb
 
 Twirp::Rails.configuration do |c|
@@ -46,7 +46,7 @@ end
 
 Add the line `use_twirp` in `config/routes.rb`.  By this, you can tell Rails app what endpoints to be served.
 
-```
+```ruby
 # config/routes.rb
 
 Rails.application.routes.draw do
@@ -58,7 +58,7 @@ end
 
 Next, let's link handlers(a.k.a controllers) with services. `bind` method can bind them.
 
-```
+```ruby
 class HelloHandler
   include Twirp::Rails::Helpers
 
