@@ -4,9 +4,14 @@ Twirp for Rails
 
 ## Features
 
-Twirp::Rails provides some features to integrate [twirp-ruby](https://github.com/twitchtv/twirp-ruby) with Ruby on Rails.
+[twirp-ruby](https://github.com/twitchtv/twirp-ruby) with Ruby on Rails. It provides auto routing installation, by using the `bind` helper method to bind a handler and a service.
 
-* Automatic routing installation, by using the `bind` helper method to bind a handler and a service.
+```
+$ bin/rails routes
+
+Prefix Verb URI Pattern                           Controller#Action
+       POST /twirp/HelloService(.:format)         #<HelloService:0x00007f876e037e18 ...>
+```
 
 ## Installation
 
