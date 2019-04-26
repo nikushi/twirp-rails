@@ -1,4 +1,4 @@
-# Twirp::Rails
+# Twirp::Rails [![Build Status](https://travis-ci.org/nikushi/twirp-rails.svg?branch=master)](https://travis-ci.org/nikushi/twirp-rails) [![Gem Version](https://badge.fury.io/rb/twirp-rails.svg)](https://badge.fury.io/rb/twirp-rails)
 
 Twirp for Rails
 
