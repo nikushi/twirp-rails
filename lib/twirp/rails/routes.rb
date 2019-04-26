@@ -10,6 +10,15 @@ module Twirp
         end
       end
 
+      # A module to modify the output of the controller part on `rails routes`
+      module Inspectable
+        def inspect
+          handler = instance_variable_get(:@handler).class.name.underscore
+          methods = self.class.rpcs.values.map { |h| h[:ruby_method].to_s }.sort.join(',')
+          [handler, methods].join('#')
+        end
+      end
+
       def self.install!
         ActionDispatch::Routing::Mapper.send :include, Twirp::Rails::Routes::Helper
       end
@@ -24,6 +33,7 @@ module Twirp
       def generate_routes!(options)
         routes.scope options[:scope] || 'twirp', as: 'twirp' do
           @services.each do |service|
+            service.extend Inspectable
             @routes.match service.full_name, to: service, via: :post
           end
         end

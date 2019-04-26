@@ -10,7 +10,7 @@ Twirp for Rails
 $ bin/rails routes
 
 Prefix Verb URI Pattern                           Controller#Action
-       POST /twirp/HelloService(.:format)         #<HelloService:0x00007f876e037e18 ...>
+       POST /twirp/HelloService(.:format)         hello_handler#hello,hi,greet
 ```
 
 ## Installation
@@ -59,7 +59,7 @@ end
 Next, let's link handlers(a.k.a controllers) with services. `bind` method can bind them.
 
 ```
-class HelloController
+class HelloHandler
   include Twirp::Rails::Helpers
 
   bind HelloService
@@ -76,7 +76,7 @@ So now corresponding routes will be defined.
 $ bin/rails routes
 
 Prefix Verb URI Pattern                           Controller#Action
-       POST /twirp/HelloService(.:format)         #<HelloService:0x00007f876e037e18 ...>
+       POST /twirp/HelloService(.:format)         hello_handler#hello,hi,greet
 ```
 
 ## Development
