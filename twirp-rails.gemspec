@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nobuhiro Nikushi"]
   spec.email         = ["deneb.ge@gmail.com"]
 
-  spec.summary       = "A small library to help to integrate Twrip with a Rails app"
+  spec.summary       = "Twirp for Rails"
   spec.description   = spec.summary
-  spec.homepage      = "https://github.com/nikushi/twirp/rails"
+  spec.homepage      = "https://github.com/nikushi/twirp-rails"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
