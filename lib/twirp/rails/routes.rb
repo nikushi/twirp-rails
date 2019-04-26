@@ -31,7 +31,7 @@ module Twirp
       end
 
       def generate_routes!(options)
-        routes.scope options[:scope] || 'twirp', as: 'twirp' do
+        routes.scope options[:scope] || 'twirp' do
           @services.each do |service|
             service.extend Inspectable
             @routes.match service.full_name, to: service, via: :post
