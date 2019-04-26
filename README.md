@@ -1,11 +1,12 @@
 # Twirp::Rails
 
-By using this gem, you can easily make Twirp RPC server on your Rails app.
+Twirp for Rails
 
 ## Features
 
-* A helper method to bind a controller with a service class.
-* Automatic routing installation
+Twirp::Rails provides some features to integrate [twirp-ruby](https://github.com/twitchtv/twirp-ruby) with Ruby on Rails.
+
+* Automatic routing installation, by using the `bind` helper method to bind a handler and a service.
 
 ## Installation
 
@@ -23,11 +24,22 @@ Or install it yourself as:
 
     $ gem install twirp-rails
 
-## Configure
+## Configuration
+
+After insalled, put the configuration file as follows:
+
+```
+# config/initializers/twirp_rails.rb
+
+Twirp::Rails.configuration do |c|
+  # Modify the path below if you locates handlers under the different directory.
+  c.handlers_path = Rails.root.join('app', 'controllers', 'rpc')
+end
+```
 
 ### Routes
 
-To add routes, configure config/routes.rb as follow:
+Add the line `use_twirp` in `config/routes.rb`.  By this, you can tell Rails app what endpoints to be served.
 
 ```
 # config/routes.rb
@@ -37,21 +49,9 @@ Rails.application.routes.draw do
 end
 ```
 
-### Configuration
+### Binding
 
-You can customize:
-
-```
-# config/initializers/twirp_rails.rb
-
-Twirp::Rails.configuration do |c|
-  c.handlers_path = Rails.root.join('app', 'controllers', 'rpc')
-end
-```
-
-## Usage
-
-Your app can automatically know how requests should route, by calling the helper method `bind` in controller implementations.
+Next, let's link handlers(a.k.a controllers) with services. `bind` method can bind them.
 
 ```
 class HelloController
@@ -65,12 +65,13 @@ class HelloController
 end
 ```
 
-By that above, corresponding route would be automatically defined.
+So now corresponding routes will be defined.
 
 ```
 $ bin/rails routes
 
-POST /twirp/HelloService/Hello => app
+Prefix Verb URI Pattern                           Controller#Action
+       POST /twirp/HelloService(.:format)         #<HelloService:0x00007f876e037e18 ...>
 ```
 
 ## Development
