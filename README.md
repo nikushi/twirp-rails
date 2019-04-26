@@ -10,7 +10,7 @@ Twirp for Rails
 $ bin/rails routes
 
 Prefix Verb URI Pattern                           Controller#Action
-       POST /twirp/HelloService(.:format)         hello_handler#hello,hi,greet
+       POST /twirp/HelloService(.:format)         hello#hello,hi,greet
 ```
 
 ## Installation
@@ -76,7 +76,7 @@ So now corresponding routes will be defined.
 $ bin/rails routes
 
 Prefix Verb URI Pattern                           Controller#Action
-       POST /twirp/HelloService(.:format)         hello_handler#hello,hi,greet
+       POST /twirp/HelloService(.:format)         hello#hello,hi,greet
 ```
 
 ## Development

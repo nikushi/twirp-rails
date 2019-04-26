@@ -12,8 +12,10 @@ module Twirp
 
       # A module to modify the output of the controller part on `rails routes`
       module Inspectable
+        REMOVABLE_SUFFIX_RE = /(_handler|_controller)\z/
+
         def inspect
-          handler = instance_variable_get(:@handler).class.name.underscore
+          handler = instance_variable_get(:@handler).class.name.underscore.sub(REMOVABLE_SUFFIX_RE, '')
           methods = self.class.rpcs.values.map { |h| h[:ruby_method].to_s }.sort.join(',')
           [handler, methods].join('#')
         end
