@@ -19,6 +19,9 @@ module Twirp
         end
       end
 
+      # A null hanlder to cause a bad_route error by unexpected rpc call, instead of raising a routing error by Rails.
+      class CatchAllHandler; end
+
       def self.install!
         ActionDispatch::Routing::Mapper.send :include, Twirp::Rails::Routes::Helper
       end
@@ -40,6 +43,11 @@ module Twirp
               @routes.match path, to: service, format: false, via: :all
             end
           end
+
+          # Set catch-all route
+          null_service = ::Twirp::Service.new(CatchAllHandler.new)
+          null_service.extend Inspectable
+          routes.mount null_service, at: '/'
         end
       end
     end
