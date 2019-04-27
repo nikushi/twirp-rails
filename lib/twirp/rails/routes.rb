@@ -15,9 +15,7 @@ module Twirp
         REMOVABLE_SUFFIX_RE = /(_handler|_controller)\z/
 
         def inspect
-          handler = instance_variable_get(:@handler).class.name.underscore.sub(REMOVABLE_SUFFIX_RE, '')
-          methods = self.class.rpcs.values.map { |h| h[:ruby_method].to_s }.sort.join(',')
-          [handler, methods].join('#')
+          instance_variable_get(:@handler).class.name.underscore.sub(REMOVABLE_SUFFIX_RE, '')
         end
       end
 
@@ -36,7 +34,11 @@ module Twirp
         routes.scope options[:scope] || 'twirp' do
           @services.each do |service|
             service.extend Inspectable
-            @routes.mount service, at: service.full_name
+            service.class.rpcs.values.each do |h|
+              rpc_method = h[:rpc_method]
+              path = service.full_name + '/' + rpc_method.to_s
+              @routes.match path, to: service, format: false, via: :all
+            end
           end
         end
       end

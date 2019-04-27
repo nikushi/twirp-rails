@@ -10,7 +10,8 @@ Twirp for Rails
 $ bin/rails routes
 
 Prefix Verb URI Pattern                           Controller#Action
-       POST /twirp/HelloService(.:format)         hello#hello,hi,greet
+            /twirp/HelloService/Greet             hello
+            /twirp/HelloService/Hi                hello
 ```
 
 ## Installation
@@ -64,7 +65,7 @@ class HelloHandler
 
   bind HelloService
 
-  def hello(_req, _env)
+  def greet(_req, _env)
     HelloResponse.new(message: 'hello')
   end
 end
@@ -76,7 +77,8 @@ So now corresponding routes will be defined.
 $ bin/rails routes
 
 Prefix Verb URI Pattern                           Controller#Action
-       POST /twirp/HelloService(.:format)         hello#hello,hi,greet
+            /twirp/HelloService/Greet             hello
+            /twirp/HelloService/Hi                hello
 ```
 
 ## Development
