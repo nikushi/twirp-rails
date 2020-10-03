@@ -8,8 +8,8 @@ module Twirp
       end
 
       module ClassMethods
-        def bind(service_klass)
-          Twirp::Rails.services << service_klass.new(new)
+        def bind(service_klass, context = nil)
+          Twirp::Rails.services << [service_klass.new(new), context]
         end
       end
     end
