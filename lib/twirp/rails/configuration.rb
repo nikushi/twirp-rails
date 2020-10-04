@@ -3,14 +3,14 @@
 module Twirp
   module Rails
     class Configuration
-      attr_reader :handlers_path
+      attr_reader :handlers_paths
 
       def initialize
-        @handlers_path = nil
+        @handlers_paths = []
       end
 
-      def handlers_path=(v)
-        @handlers_path = v.to_s
+      def add_handlers_path(path)
+        @handlers_paths << path.to_s
       end
     end
   end

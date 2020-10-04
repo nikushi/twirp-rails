@@ -35,7 +35,9 @@ module Twirp
 
       def generate_routes!(options)
         routes.scope options[:scope] || 'twirp' do
-          @services.each do |service|
+          @services.each do |service, context|
+            next unless in_context?(options[:context], context)
+
             service.extend Inspectable
             service.class.rpcs.values.each do |h|
               rpc_method = h[:rpc_method]
@@ -49,6 +51,13 @@ module Twirp
           null_service.extend Inspectable
           routes.mount null_service, at: '/'
         end
+      end
+
+      def in_context?(option_context, bind_context)
+        return true if option_context.nil?
+        return true if bind_context.nil?
+
+        option_context == bind_context
       end
     end
   end

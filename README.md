@@ -51,7 +51,7 @@ Add the line `use_twirp` in `config/routes.rb`.  By this, you can tell Rails app
 # config/routes.rb
 
 Rails.application.routes.draw do
-  use_twirp
+  use_twirp(context: :public)
 end
 ```
 
@@ -63,7 +63,7 @@ Next, let's link handlers(a.k.a controllers) with services. `bind` method can bi
 class HelloHandler
   include Twirp::Rails::Helpers
 
-  bind HelloService
+  bind HelloService, :public
 
   def greet(_req, _env)
     HelloResponse.new(message: 'hello')
@@ -80,6 +80,12 @@ Prefix Verb URI Pattern                           Controller#Action
             /twirp/HelloService/Greet             hello
             /twirp/HelloService/Hi                hello
 ```
+
+### Routes/Binding context
+
+The example of above is specified 'public' context.
+
+If you doesn't specified it, defines the all of routing that is binded services.
 
 ## Development
 

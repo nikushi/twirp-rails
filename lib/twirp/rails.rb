@@ -14,6 +14,7 @@ module Twirp
         yield @configuration if block_given?
         @configuration
       end
+
       attr_writer :configuration
 
       # A store to register rack apps, which are the instantiated services.
@@ -23,7 +24,9 @@ module Twirp
       end
 
       def load_handlers
-        Dir[File.join(configuration.handlers_path.to_s, '**', '*.rb')].each { |f| require f }
+        configuration.handlers_paths.each do |handlers_path|
+          Dir[File.join(handlers_path.to_s, '**', '*.rb')].sort.each { |f| require f }
+        end
       end
     end
   end
