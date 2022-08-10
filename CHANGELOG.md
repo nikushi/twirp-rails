@@ -1,3 +1,9 @@
+# v0.1.2 / 2022-08-10
+
+## Enhancements
+
+* Enable logging for twirp request events
+
 # v0.1.1 / 2019-04-27
 
 ## Enhancements
