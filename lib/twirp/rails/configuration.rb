@@ -4,6 +4,7 @@ module Twirp
   module Rails
     class Configuration
       attr_reader :handlers_path
+      attr_accessor :logger
 
       def initialize
         @handlers_path = nil

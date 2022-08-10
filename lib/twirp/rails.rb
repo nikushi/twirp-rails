@@ -4,6 +4,7 @@ require "twirp/rails/configuration"
 require "twirp/rails/helpers"
 require "twirp/rails/routes"
 require "twirp/rails/engine"
+require "twirp/rails/events_logger"
 require "twirp/rails/version"
 
 module Twirp
@@ -24,6 +25,13 @@ module Twirp
 
       def load_handlers
         Dir[File.join(configuration.handlers_path.to_s, '**', '*.rb')].each { |f| require f }
+      end
+
+      def create_events_logger
+        return unless configuration.logger.present?
+
+        event_logger = Twirp::Rails::EventsLogger.new(::Rails.logger)
+        Twirp::Rails.services.each { |s| event_logger.register(s) }
       end
     end
   end
