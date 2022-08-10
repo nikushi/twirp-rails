@@ -29,6 +29,9 @@ module Twirp
       end
 
       def register_callbacks
+        # as for now, the only callbacks are for logging, we can skip it if logger was not set
+        return if Twirp::Rails::EventsLogger.logger.nil?
+
         Twirp::Rails.services.each { |s| Twirp::Rails::EventsCallbacks.register(s) }
       end
     end
